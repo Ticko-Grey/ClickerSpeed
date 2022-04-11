@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html>
+    <body>
+        <button type="button" onclick="ClickButton()">Click Here</button> 
+        <p id="CPS">CPS: 0</p>
+    </body>
+</html>
+
+<script>
+    var ClicksThisSecond = 0;
+    const ClickDisplay = document.getElementById("CPS");
+
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+    
+    function ClickButton() {
+        ClicksThisSecond += 1;
+        console.log("click");
+    }
+
+    async function Run() {
+        while (true){
+            ClickDisplay.innerHTML = "CPS: " + ClicksThisSecond;
+            console.log("refresh: " + ClicksThisSecond);
+            console.log("Actual text: " + ClickDisplay.innerHTML);
+            ClicksThisSecond = 0;           
+            await sleep(1000);
+        }
+    }
+
+    Run()    
+</script>
